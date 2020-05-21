@@ -3,7 +3,7 @@ const messages = document.getElementById("messages");
 const form = document.getElementById("form");
 const input = document.getElementById("input");
 
-const ws = new WebSocket('ws://localhost:3000');
+const ws = new WebSocket("ws://localhost:3000");
 
 function setStatus(value) {
   status.innerHTML = value;
@@ -16,8 +16,15 @@ function printMessage(value) {
   messages.appendChild(li);
 }
 
-ws.onopen = () => setStatus('ONLINE');
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-ws.onclose = () => setStatus('DISCONNECTED');
+  ws.send(input.value);
+  input.value = "";
+});
 
-ws.onmessage = response => printMessage(response.data);
+ws.onopen = () => setStatus("ONLINE");
+
+ws.onclose = () => setStatus("DISCONNECTED");
+
+ws.onmessage = (response) => printMessage(response.data);
