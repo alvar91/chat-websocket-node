@@ -1,2 +1,2 @@
 # chat-websocket-node
-Chat room with websocket connection
+Chatroom with websocket connection
